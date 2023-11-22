@@ -1,4 +1,4 @@
-name: Main Taski workflow
+name: Main Kittygram workflow
 
 on:
   push:
@@ -116,7 +116,7 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./gateway/
+          context: ./nginx/
           push: true
           tags: inferno681/kittygram_gateway:latest
   deploy:
@@ -136,7 +136,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: "docker-compose.production.yml"
-        target: "taski"
+        target: "Kittygram"
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
       with:

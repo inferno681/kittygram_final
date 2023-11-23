@@ -1,51 +1,44 @@
-### Как запустить проект:
+[![.github/workflows/main.yml](https://github.com/inferno681/kittygram_final/actions/workflows/main.yml/badge.svg)](https://github.com/inferno681/kittygram_final/actions/workflows/main.yml)
+## Описание:
+Сайт для желающих поделиться информацией о своих кошках.
+# Возможности:
+Публикация имени, цвета, года рождения, фото и достижений своего питомца.
+# Инструменты:
+- Python - язык программирования, на котором написан проект. [Python документация](https://docs.python.org/3.9/)
+- Django - веб-фреймворк для разработки веб-приложений. [Документация](https://docs.djangoproject.com/)
+- Django REST framework - библиотека для создания RESTful API на основе Django. [Документация](https://www.django-rest-framework.org/)
+- Docker - открытая платформа для разработки, доставки и эксплуатации приложений.[Документация](https://docs.docker.com/)
 
-Клонировать репозиторий и перейти в него в командной строке:
+## Запуск проекта на сервере под управлением ОС Linux:
 
-```
-git clone https://github.com/yandex-praktikum/kittygram_backend.git
-```
-
-```
-cd kittygram_backend
-```
-
-Cоздать и активировать виртуальное окружение:
-
-```
-python3 -m venv env
-```
-
-* Если у вас Linux/macOS
-
-    ```
-    source env/bin/activate
-    ```
-
-* Если у вас windows
-
-    ```
-    source env/scripts/activate
-    ```
-
-```
-python3 -m pip install --upgrade pip
+1. Подготовка виртуального окружения в директории проекта:
+```bash
+nano .env
 ```
 
-Установить зависимости из файла requirements.txt:
+2. Содержание файла виртуального окружения:
+Для корректной работы проекты не изменяйте строки, помеченные '!'
+```nano
+POSTGRES_USER=django_user (имя пользователя для СУБД)
+POSTGRES_PASSWORD=mysecretpassword (пароль пользователя для СУБД)
+POSTGRES_DB=django (имя базы данных)
+DB_HOST=db (контейнер с базой данных) - !
+DB_PORT=5432 (порт для PostgreSQL) - !
+SECRET_KEY =... (SECRET_KEY для settings.py)
+ALLOWED_HOSTS =127.0.0.1,localhost (список разрешенных хостов)
+DEBUG=False (включение или выключение режима отладки)
+SQLITE_ACTIVATED=False (Если True, то будет использоваться SQLite вместо PostgreSQL)
+```
 
-```
-pip install -r requirements.txt
-```
-
-Выполнить миграции:
-
-```
-python3 manage.py migrate
+3. Установка утилиты Docker Compose:
+```bash
+sudo apt update
+sudo apt-get install docker-compose-plugin
 ```
 
-Запустить проект:
-
+4. Копирование файла `docker-compose.production.yml` в директорию проекта и запуск Docker Compose:
+```bash
+sudo docker-compose up
 ```
-python3 manage.py runserver
-```
+## Авторы:
+Василий Стакроцкий https://github.com/inferno681

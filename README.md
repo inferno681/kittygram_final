@@ -1,26 +1,44 @@
-#  Как работать с репозиторием финального задания
+[![.github/workflows/main.yml](https://github.com/inferno681/kittygram_final/actions/workflows/main.yml/badge.svg)](https://github.com/inferno681/kittygram_final/actions/workflows/main.yml)
+## Описание:
+Сайт для желающих поделиться информацией о своих кошках.
+### Возможности:
+Публикация имени, цвета, года рождения, фото и достижений своего питомца.
+### Инструменты:
+- Python - язык программирования, на котором написан проект. [Python документация](https://docs.python.org/3.9/)
+- Django - веб-фреймворк для разработки веб-приложений. [Документация](https://docs.djangoproject.com/)
+- Django REST framework - библиотека для создания RESTful API на основе Django. [Документация](https://www.django-rest-framework.org/)
+- Docker - открытая платформа для разработки, доставки и эксплуатации приложений.[Документация](https://docs.docker.com/)
 
-## Что нужно сделать
+## Запуск проекта на сервере под управлением ОС Linux:
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
-
-## Как проверить работу с помощью автотестов
-
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
+1. Подготовка виртуального окружения в директории проекта:
+```bash
+nano .env
 ```
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+2. Содержание файла виртуального окружения:
+Для корректной работы проекты не изменяйте строки, помеченные '!'
+```nano
+POSTGRES_USER=django_user (имя пользователя для СУБД)
+POSTGRES_PASSWORD=mysecretpassword (пароль пользователя для СУБД)
+POSTGRES_DB=django (имя базы данных)
+DB_HOST=db (контейнер с базой данных) - !
+DB_PORT=5432 (порт для PostgreSQL) - !
+SECRET_KEY =... (SECRET_KEY для settings.py)
+ALLOWED_HOSTS =127.0.0.1,localhost (список разрешенных хостов)
+DEBUG=False (включение или выключение режима отладки)
+SQLITE_ACTIVATED=False (Если True, то будет использоваться SQLite вместо PostgreSQL)
+```
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+3. Установка утилиты Docker Compose:
+```bash
+sudo apt update
+sudo apt-get install docker-compose-plugin
+```
 
-## Чек-лист для проверки перед отправкой задания
-
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+4. Копирование файла `docker-compose.production.yml` в директорию проекта и запуск Docker Compose:
+```bash
+sudo docker-compose up
+```
+## Авторы:
+Василий Стакроцкий https://github.com/inferno681

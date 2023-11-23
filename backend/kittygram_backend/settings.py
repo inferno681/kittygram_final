@@ -1,5 +1,4 @@
 # flake8: noqa
-from distutils.util import strtobool
 import os
 from pathlib import Path
 
@@ -11,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'test_key')
 
-DEBUG = strtobool(os.getenv('DEBUG', 'False'))
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
 
@@ -58,7 +57,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 
-if strtobool(os.getenv('SQLITE_ACTIVATED', 'False')):
+if os.getenv('SQLITE_ACTIVATED', 'False') == 'True':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

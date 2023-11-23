@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = strtobool(os.getenv('DEBUG').lower())
+DEBUG = strtobool(os.getenv('DEBUG', 'False').lower())
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
 
@@ -58,7 +58,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 
-if strtobool(os.getenv('SQLITE_ACTIVATED').lower()):
+if strtobool(os.getenv('SQLITE_ACTIVATED', 'False').lower()):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
